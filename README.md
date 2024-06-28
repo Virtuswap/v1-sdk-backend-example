@@ -15,4 +15,5 @@ pnpm start
 bun start
 ```
 
-Check [routes.ts](./src/routes.ts) to see available routes.
+Open [http://localhost:3000/documentation](http://localhost:3000/documentation) with your browser to see the Swagger UI
+or check [routes.ts](./src/routes.ts) to see available routes.

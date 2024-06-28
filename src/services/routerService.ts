@@ -57,7 +57,7 @@ export async function getRoute(
     const calldata = await router.generateMulticallData(route, userAddress);
 
     const routerMulticallInterface = new ethers.utils.Interface([
-        'function multicall(bytes[] calldata data) public payable override returns (bytes[] memory results)',
+        'function multicall(bytes[] calldata data) public payable returns (bytes[] memory results)',
     ]);
 
     const data = routerMulticallInterface.encodeFunctionData('multicall', [

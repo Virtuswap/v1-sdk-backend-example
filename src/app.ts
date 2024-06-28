@@ -1,7 +1,11 @@
 import fastify from 'fastify';
 import cors from '@fastify/cors';
+import swagger from '@fastify/swagger';
+import swaggerUI from '@fastify/swagger-ui';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import routes from './routes';
+import favicon from './static/favicon.svg';
+import logo from './static/logo.svg';
 
 console.log('STARTING');
 
@@ -16,6 +20,38 @@ process.on('uncaughtException', (err) => {
 
 _fastifyInstance.register(cors, {
     origin: '*',
+});
+
+_fastifyInstance.register(swagger, {
+    openapi: {
+        openapi: '3.0.0',
+    },
+});
+
+_fastifyInstance.register(swaggerUI, {
+    routePrefix: '/documentation',
+    logo: {
+        type: 'image/svg+xml',
+        content: logo,
+    },
+    theme: {
+        title: 'VirtuSwap SDK v1 Example',
+        favicon: [
+            {
+                filename: 'favicon.svg.ts',
+                rel: 'icon',
+                sizes: 'any',
+                type: 'image/svg+xml',
+                content: favicon,
+            },
+        ],
+    },
+    uiConfig: {
+        docExpansion: 'full',
+        deepLinking: false,
+    },
+    staticCSP: true,
+    transformSpecificationClone: true,
 });
 
 _fastifyInstance.register(routes);
