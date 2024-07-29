@@ -7,7 +7,7 @@ import {
 } from 'fastify';
 import { Type, TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { getRoute } from './services/routerService';
-import { Chain, getAllTokens } from '@virtuswap/v1-sdk';
+import { MainnetChain, getAllTokens } from '@virtuswap/v1-sdk';
 
 async function routes(
     fastify: FastifyInstance<
@@ -45,10 +45,10 @@ async function routes(
                             examples: ['5000000000000000000'],
                         }
                     ),
-                    chain: Type.Enum(Chain, {
+                    chain: Type.Enum(MainnetChain, {
                         description:
                             'The chain on which swap will be performed',
-                        examples: [Chain.POLYGON_MAINNET],
+                        examples: [MainnetChain.POLYGON_MAINNET],
                     }),
                     slippage: Type.Optional(Type.Number({ minimum: 0 })),
                     isExactInput: Type.Optional(
@@ -101,10 +101,10 @@ async function routes(
             schema: {
                 description: 'Get all supported tokens on the selected chain',
                 querystring: Type.Object({
-                    chain: Type.Enum(Chain, {
+                    chain: Type.Enum(MainnetChain, {
                         description:
                             'The chain for which tokens should be fetched',
-                        examples: [Chain.POLYGON_MAINNET],
+                        examples: [MainnetChain.POLYGON_MAINNET],
                     }),
                 }),
             },
