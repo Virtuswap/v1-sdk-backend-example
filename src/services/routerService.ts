@@ -19,10 +19,7 @@ export async function getRoute(
 
     if (!userAddress) return { route };
 
-    const transaction = await router.generateTransactionData(
-        route,
-        userAddress
-    );
+    const transaction = router.generateTransactionDataV3(route, userAddress);
 
     return {
         route,
